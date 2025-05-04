@@ -1,36 +1,35 @@
 package methodref;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-public class MethodRefEx1 {
+public class MethodRefEx2 {
 
     public static void main(String[] args) {
 
         // 1. 정적 메서드 참조
-        Supplier<String> staticMethod1 = () -> Person.greeting();
-        System.out.println("staticMethod1 = " + staticMethod1.get());
+        Function<String, String> staticMethod1 = (name) -> Person.greetingWithName(name);
+        System.out.println("staticMethod1.apply(\"Gu\") = " + staticMethod1.apply("Gu"));
 
-        Supplier<String> staticMethod2 = Person::greeting;
-        System.out.println("staticMethod2 = " + staticMethod2.get());
+        Function<String, String> staticMethod2 = Person::greetingWithName;
+        System.out.println("staticMethod2.apply(\"Gu\") = " + staticMethod2.apply("Gu"));
 
         // 2. 특정 객체의 인스턴스 참조
-        Person person = new Person("Kim");
-        Supplier<String> instanceMethod1 = () -> person.introduce();
-        System.out.println("instanceMethod1 = " + instanceMethod1.get());
+        Person person = new Person("Gu");
+        Function<Integer, String> instanceMethod1 = (n) -> person.introduceWithNumber(n);
+        System.out.println("instanceMethod1.apply(5) = " + instanceMethod1.apply(5));
 
-        Supplier<String> instanceMethod2 = person::introduce;
-        System.out.println("instanceMethod2 = " + instanceMethod2.get());
+        Function<Integer, String> instanceMethod2 = person::introduceWithNumber;
+        System.out.println("instanceMethod2.apply(5) = " + instanceMethod2.apply(10));
+
 
         // 3. 생성자 참조
-        Supplier<Person> newPerson1 = () -> new Person();
-        System.out.println("newPerson1 = " + newPerson1.get());
+        Function<String, Person> newPerson1 = (name) -> new Person(name);
+        System.out.println("newPerson1.apply(\"Gu\") = " + newPerson1.apply("Gu").getName());
 
-        Supplier<Person> newPerson2 = Person::new;
-        System.out.println("newPerson2 = " + newPerson2.get());
-
-        UnaryOperator<String> unaryOperator = x -> x.toUpperCase();
-        UnaryOperator<String> unaryOperator2 = String::toUpperCase; // 호출할 수 있는 "함수 자체"를 넘긴다.
-
+        Function<String, Person> newPerson2 = Person::new;
+        // ㄴ 기본 생성자와 다른 생성자 중 어떻게 구분하는가?
+        System.out.println("newPerson2.apply(\"Gu\") = " + newPerson2.apply("Gu").getName());
     }
 }

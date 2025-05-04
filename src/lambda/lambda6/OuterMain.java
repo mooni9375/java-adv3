@@ -2,6 +2,15 @@ package lambda.lambda6;
 
 public class OuterMain {
 
+    public static void main(String[] args) {
+        OuterMain outer = new OuterMain();
+        System.out.println("[외부 클래스] outer : " + outer);
+        System.out.println("[외부 클래스] message : " + outer.message);
+        System.out.println("--------------------------------------------------");
+        outer.execute();
+
+    }
+
     private String message = "외부 클래스";
 
     public void execute() {
@@ -32,14 +41,5 @@ public class OuterMain {
         lambda.run();
     }
 
-    public static void main(String[] args) {
-        OuterMain outer = new OuterMain();
-        System.out.println("[외부 클래스] outer : " + outer);
-        System.out.println("[외부 클래스] message : " + outer.message);
-        System.out.println("--------------------------------------------------");
-        outer.execute();
 
-
-
-    }
 }

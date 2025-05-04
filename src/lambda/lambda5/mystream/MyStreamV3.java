@@ -2,6 +2,7 @@ package lambda.lambda5.mystream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -40,6 +41,16 @@ public class MyStreamV3<T> {
             mapped.add(mapper.apply(t));
         }
         return MyStreamV3.of(mapped);
+    }
+
+    public void forEach(Consumer<T> consumer) {
+        for (T t : internalList) {
+            consumer.accept(t);
+        }
+    }
+
+    public T getFirst() {
+        return internalList.get(0);
     }
 
     public List<T> toList() {
