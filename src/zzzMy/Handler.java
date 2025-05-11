@@ -9,7 +9,7 @@ public class Handler {
     public void myProcess() throws ExecutionException, InterruptedException {
         System.out.println("[Handler] myProcess...");
 
-        helper.doSomething(this::updateMessage);
+//        helper.doSomething(this::updateMessage);
 
         helper.doSomething((message, msg) -> {
             updateMessage(message, msg);

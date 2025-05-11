@@ -13,8 +13,9 @@ public class Actor {
         System.out.println("[Actor] message.getMessage() = " + message.getMessage());
 
         try {
-            consumer.accept(message, "Success Message set in Actor by consumer");
-            completableFuture.complete(message);
+            throw new Exception("Exception in Actor");
+            // consumer.accept(message, "Success Message set in Actor by consumer");
+            // completableFuture.complete(message);
 
         } catch (Exception e) {
             consumer.accept(message, "Fail Message set in Actor by consumer");
